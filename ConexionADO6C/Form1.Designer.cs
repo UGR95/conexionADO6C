@@ -39,22 +39,24 @@
             this.label9 = new System.Windows.Forms.Label();
             this.txbDireccion = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.txbTelefono = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.txbApellido = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.txbNombre = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.txbId = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.txbFiltro = new System.Windows.Forms.TextBox();
             this.dgvDatos = new System.Windows.Forms.DataGridView();
+            this.mskId = new System.Windows.Forms.MaskedTextBox();
+            this.mskTelefono = new System.Windows.Forms.MaskedTextBox();
+            this.btnEliminar = new System.Windows.Forms.Button();
+            this.btnModificar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).BeginInit();
             this.SuspendLayout();
             // 
             // btnAgregar
             // 
-            this.btnAgregar.Location = new System.Drawing.Point(35, 422);
+            this.btnAgregar.Location = new System.Drawing.Point(26, 415);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(75, 23);
             this.btnAgregar.TabIndex = 41;
@@ -145,13 +147,6 @@
             this.label4.TabIndex = 31;
             this.label4.Text = "Telefono";
             // 
-            // txbTelefono
-            // 
-            this.txbTelefono.Location = new System.Drawing.Point(103, 194);
-            this.txbTelefono.Name = "txbTelefono";
-            this.txbTelefono.Size = new System.Drawing.Size(123, 20);
-            this.txbTelefono.TabIndex = 30;
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -182,7 +177,7 @@
             this.txbNombre.Location = new System.Drawing.Point(103, 120);
             this.txbNombre.Name = "txbNombre";
             this.txbNombre.Size = new System.Drawing.Size(123, 20);
-            this.txbNombre.TabIndex = 26;
+            this.txbNombre.TabIndex = 2;
             // 
             // label2
             // 
@@ -192,13 +187,6 @@
             this.label2.Size = new System.Drawing.Size(44, 13);
             this.label2.TabIndex = 25;
             this.label2.Text = "Id Autor";
-            // 
-            // txbId
-            // 
-            this.txbId.Location = new System.Drawing.Point(103, 82);
-            this.txbId.Name = "txbId";
-            this.txbId.Size = new System.Drawing.Size(123, 20);
-            this.txbId.TabIndex = 24;
             // 
             // label1
             // 
@@ -224,12 +212,53 @@
             this.dgvDatos.Name = "dgvDatos";
             this.dgvDatos.Size = new System.Drawing.Size(476, 327);
             this.dgvDatos.TabIndex = 21;
+            this.dgvDatos.SelectionChanged += new System.EventHandler(this.dgvDatos_SelectionChanged);
+            // 
+            // mskId
+            // 
+            this.mskId.Location = new System.Drawing.Point(103, 79);
+            this.mskId.Mask = "000-00-0000";
+            this.mskId.Name = "mskId";
+            this.mskId.Size = new System.Drawing.Size(123, 20);
+            this.mskId.TabIndex = 1;
+            // 
+            // mskTelefono
+            // 
+            this.mskTelefono.Location = new System.Drawing.Point(103, 194);
+            this.mskTelefono.Mask = "000 00-0000";
+            this.mskTelefono.Name = "mskTelefono";
+            this.mskTelefono.Size = new System.Drawing.Size(123, 20);
+            this.mskTelefono.TabIndex = 43;
+            // 
+            // btnEliminar
+            // 
+            this.btnEliminar.Location = new System.Drawing.Point(151, 415);
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.Size = new System.Drawing.Size(75, 23);
+            this.btnEliminar.TabIndex = 44;
+            this.btnEliminar.Text = "Eliminar";
+            this.btnEliminar.UseVisualStyleBackColor = true;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
+            // 
+            // btnModificar
+            // 
+            this.btnModificar.Location = new System.Drawing.Point(273, 415);
+            this.btnModificar.Name = "btnModificar";
+            this.btnModificar.Size = new System.Drawing.Size(75, 23);
+            this.btnModificar.TabIndex = 45;
+            this.btnModificar.Text = "Modificar";
+            this.btnModificar.UseVisualStyleBackColor = true;
+            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnModificar);
+            this.Controls.Add(this.btnEliminar);
+            this.Controls.Add(this.mskTelefono);
+            this.Controls.Add(this.mskId);
             this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.chbContrato);
             this.Controls.Add(this.label6);
@@ -241,13 +270,11 @@
             this.Controls.Add(this.label9);
             this.Controls.Add(this.txbDireccion);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.txbTelefono);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.txbApellido);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txbNombre);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.txbId);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txbFiltro);
             this.Controls.Add(this.dgvDatos);
@@ -273,16 +300,18 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox txbDireccion;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox txbTelefono;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txbApellido;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txbNombre;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox txbId;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txbFiltro;
         private System.Windows.Forms.DataGridView dgvDatos;
+        private System.Windows.Forms.MaskedTextBox mskId;
+        private System.Windows.Forms.MaskedTextBox mskTelefono;
+        private System.Windows.Forms.Button btnEliminar;
+        private System.Windows.Forms.Button btnModificar;
     }
 }
 

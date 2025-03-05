@@ -58,6 +58,7 @@ namespace ConexionADO6C
         {
             try
             {
+                int cont = Contrato == true ? 1 : 0;
                 string QueryAgregar = "INSERT INTO Authors VALUES (" +
                     "'" + id + "'," +
                     "'" + Apellido + "'," +
@@ -67,7 +68,63 @@ namespace ConexionADO6C
                     "'" + Ciudad + "'," +
                     "'" + Estado + "'," +
                     "" + CodigoPostal + "," +
-                    "" + Contrato + ")";
+                    "" + cont + ")";
+
+
+                SqlConnection con = new SqlConnection(Connexionstring);
+                con.Open();
+                SqlCommand cmd = new SqlCommand(QueryAgregar, con);
+
+                cmd.ExecuteNonQuery();
+
+                con.Close();
+
+                return null;
+            }
+            catch (Exception ex)
+            {
+                return ex.ToString();
+            }
+        }
+
+        public string EliminarAutor(string id)
+        {
+            try
+            {
+
+                string QueryAgregar = "DELETE FROM Authors WHERE au_id = '" + id + "'";
+
+
+                SqlConnection con = new SqlConnection(Connexionstring);
+                con.Open();
+                SqlCommand cmd = new SqlCommand(QueryAgregar, con);
+
+                cmd.ExecuteNonQuery();
+
+                con.Close();
+
+                return null;
+            }
+            catch (Exception ex)
+            {
+                return ex.ToString();
+            }
+        }
+        public string ModificarAutor(string id, string Nombre, string Apellido, string Telefono, string Direccion, string Ciudad, string Estado, int CodigoPostal, bool Contrato)
+        {
+            try
+            {
+                int cont = Contrato == true ? 1 : 0;
+                string QueryAgregar = "UPDATE Authors" +
+                    " SET au_lname = '" + Apellido + "'," +
+                    "au_fname = '" + Nombre + "'," +
+                    "phone = '" + Telefono + "'," +
+                    "address ='" + Direccion + "'," +
+                    "city = '" + Ciudad + "'," +
+                    "state = '" + Estado + "'," +
+                    "zip = " + CodigoPostal + "," +
+                    "contract = " + cont + 
+                    "WHERE au_id = '" + id +"'";
 
 
                 SqlConnection con = new SqlConnection(Connexionstring);

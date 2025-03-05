@@ -55,7 +55,7 @@ namespace ConexionADO6C
             {
                 string Error = "";
 
-                Error = datos.AgregarAutor(txbId.Text, txbNombre.Text, txbApellido.Text, txbTelefono.Text, txbDireccion.Text, txbCiudad.Text, txbEstado.Text, Convert.ToInt32(txbCP.Text), chbContrato.Checked);
+                Error = datos.AgregarAutor(mskId.Text, txbNombre.Text, txbApellido.Text, mskTelefono.Text, txbDireccion.Text, txbCiudad.Text, txbEstado.Text, Convert.ToInt32(txbCP.Text), chbContrato.Checked);
 
                 if (string.IsNullOrEmpty(Error))
                 {
@@ -69,6 +69,77 @@ namespace ConexionADO6C
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string Error = "";
+
+                Error = datos.EliminarAutor(mskId.Text);
+
+                if (string.IsNullOrEmpty(Error))
+                {
+                    MessageBox.Show("Registro Borrado correctamente", "Informativo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show(Error, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void dgvDatos_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgvDatos.SelectedRows.Count > 0)
+            {
+
+                DataGridViewRow selec = dgvDatos.SelectedRows[0];
+
+                if (selec != null)
+                {
+                    mskId.Text = selec.Cells[0].Value.ToString();
+                    txbApellido.Text = selec.Cells[1].Value.ToString();
+                    txbNombre.Text = selec.Cells[2].Value.ToString();
+                    mskTelefono.Text = selec.Cells[3].Value.ToString();
+                    txbDireccion.Text = selec.Cells[4].Value.ToString();
+                    txbCiudad.Text = selec.Cells[5].Value.ToString();
+                    txbEstado.Text = selec.Cells[6].Value.ToString();
+                    txbCP.Text = selec.Cells[7].Value.ToString();
+                    chbContrato.Checked = Convert.ToBoolean(selec.Cells[8].Value);
+                }
+            }
+        }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string Error;
+
+                Error = datos.ModificarAutor(mskId.Text, txbNombre.Text, txbApellido.Text, mskTelefono.Text, txbDireccion.Text, txbCiudad.Text, txbEstado.Text, Convert.ToInt32(txbCP.Text), chbContrato.Checked);
+                if (string.IsNullOrEmpty(Error))
+                {
+                    MessageBox.Show("Registro Actualizado correctamente", "Informativo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    Refrescar();
+                }
+                else
+                {
+                    MessageBox.Show(Error, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
             }
         }
     }
