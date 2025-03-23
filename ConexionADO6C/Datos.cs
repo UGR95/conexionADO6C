@@ -13,14 +13,17 @@ namespace ConexionADO6C
     {
         public string Connexionstring = "Data Source = DESKTOP-7789AN9\\SQLEXPRESS; Initial Catalog = pubs6c; Integrated security = true;";
 
-        public DataTable Refrescar()
+        public DataTable Refrescar(string Estado)
         {
-            string Query = "Select * from Authors with(nolock)";
+            //string Query = "Select * from vwAutores with(nolock)";
             DataTable dt = new DataTable();
 
             SqlConnection con = new SqlConnection(Connexionstring);
             con.Open();
-            SqlCommand cmd = new SqlCommand(Query, con);
+            SqlCommand cmd = new SqlCommand("sprConsultaAutor", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@Estado", Estado );
+
             using (SqlDataReader reader = cmd.ExecuteReader())
             {
                 dt.Load(reader);
@@ -29,6 +32,29 @@ namespace ConexionADO6C
             con.Close();
             return dt;
 
+        }
+
+        public DataTable CargarEstados()
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+                SqlConnection con = new SqlConnection(Connexionstring);
+                con.Open();
+                SqlCommand cmd = new SqlCommand("sprObtenerEstados", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    dt.Load(reader);
+                }
+
+                return dt;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
         public DataTable Filtro(string Filtro)

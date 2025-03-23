@@ -26,11 +26,38 @@ namespace ConexionADO6C
         {
             try
             {
-                dgvDatos.DataSource = datos.Refrescar();
+                dgvDatos.DataSource = datos.Refrescar(null);
+                CargarComboboxEstados();
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void CargarComboboxEstados()
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+                dt = datos.CargarEstados();
+
+                DataRow nuevaFila = dt.NewRow();
+                nuevaFila["Abreviacion"] = DBNull.Value;  // Sin valor
+                nuevaFila["Nombre"] = "Seleccionar Estado";
+                dt.Rows.InsertAt(nuevaFila, 0);
+
+                cbEstados.DataSource = dt;
+                cbEstados.DisplayMember = "Nombre";
+                cbEstados.ValueMember = "Abreviacion";
+
+                cbEstados.SelectedIndex = 0;
+            }
+            catch (Exception)
+            {
+
+                throw;
             }
         }
 
@@ -140,6 +167,19 @@ namespace ConexionADO6C
             {
 
                 throw;
+            }
+        }
+
+        private void cbEstados_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                string estado = cbEstados.SelectedIndex != 0 ? cbEstados.SelectedValue?.ToString() : null;
+                dgvDatos.DataSource = datos.Refrescar(estado);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
