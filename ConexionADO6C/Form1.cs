@@ -87,6 +87,7 @@ namespace ConexionADO6C
                 if (string.IsNullOrEmpty(Error))
                 {
                     MessageBox.Show("Registro agregado correctamente", "Informativo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Limpiar();
                 }
                 else
                 {
@@ -129,9 +130,10 @@ namespace ConexionADO6C
 
                 DataGridViewRow selec = dgvDatos.SelectedRows[0];
 
-                if (selec != null)
+                if (selec != null && !string.IsNullOrEmpty(selec.Cells[0].Value.ToString()))
                 {
                     mskId.Text = selec.Cells[0].Value.ToString();
+                    mskId.Enabled = false;
                     txbApellido.Text = selec.Cells[1].Value.ToString();
                     txbNombre.Text = selec.Cells[2].Value.ToString();
                     mskTelefono.Text = selec.Cells[3].Value.ToString();
@@ -140,6 +142,11 @@ namespace ConexionADO6C
                     txbEstado.Text = selec.Cells[6].Value.ToString();
                     txbCP.Text = selec.Cells[7].Value.ToString();
                     chbContrato.Checked = Convert.ToBoolean(selec.Cells[8].Value);
+
+                }
+                else
+                {
+                    Limpiar();
                 }
             }
         }
@@ -181,6 +188,20 @@ namespace ConexionADO6C
             {
                 MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void Limpiar()
+        {
+            mskId.Clear();
+            mskId.Enabled = true;
+            txbApellido.Clear();
+            txbNombre.Clear();
+            mskTelefono.Clear();
+            txbDireccion.Clear();
+            txbCiudad.Clear();
+            txbEstado.Clear();
+            txbCP.Clear();
+            chbContrato.Checked = false;
         }
     }
 }
