@@ -20,7 +20,7 @@ namespace ConexionADO6C
 
             SqlConnection con = new SqlConnection(Connexionstring);
             con.Open();
-            SqlCommand cmd = new SqlCommand("sprConsultaAutor", con);
+            SqlCommand cmd = new SqlCommand("sprConsultarAutores", con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@Estado", Estado );
 
@@ -85,6 +85,7 @@ namespace ConexionADO6C
             try
             {
                 int cont = Contrato == true ? 1 : 0;
+                #region Query insert
                 /*string QueryAgregar = "INSERT INTO Authors VALUES (" +
                 //    "'" + id + "'," +
                 //    "'" + Apellido + "'," +
@@ -96,7 +97,7 @@ namespace ConexionADO6C
                 //    "" + CodigoPostal + "," +
                 //    "" + cont + ")";
                 */
-
+                #endregion
 
                 SqlConnection con = new SqlConnection(Connexionstring);
                 con.Open();
