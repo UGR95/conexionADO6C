@@ -115,17 +115,36 @@ namespace ConexionADO6C
             try
             {
                 string Error = "";
-
-                Error = datos.EliminarAutor(mskId.Text);
-
-                if (string.IsNullOrEmpty(Error))
+                if (dgvDatos.SelectedRows.Count == 1)
                 {
-                    MessageBox.Show("Registro Borrado correctamente", "Informativo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    DataGridViewRow selec = dgvDatos.SelectedRows[0];
+
+                    if (selec != null && selec.Cells[0].Value != null && !string.IsNullOrEmpty(selec.Cells[0].Value.ToString()))
+                    {
+                        DialogResult result = MessageBox.Show("¿Desea eliminar el registro?", "Advertencia", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                        if (result == DialogResult.Yes)
+                        {
+                            Error = datos.EliminarAutor(selec.Cells[0].Value.ToString());
+
+                            if (string.IsNullOrEmpty(Error))
+                            {
+                                MessageBox.Show("Registro borrado correctamente", "Informativo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                Refrescar();
+                            }
+                            else
+                            {
+                                MessageBox.Show(Error, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                        }
+                    }
+                    else
+                        MessageBox.Show("Favor de seleccionar un registro válido", "Informativo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
+                else if (dgvDatos.SelectedRows.Count == 0)
+                    MessageBox.Show("Favor de seleccionar un registro válido", "Información", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 else
-                {
-                    MessageBox.Show(Error, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                    MessageBox.Show("Favor de seleccionar solo 1 registro", "Información", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             catch (Exception ex)
             {
@@ -207,6 +226,8 @@ namespace ConexionADO6C
                     else
                         MessageBox.Show("Favor de seleccionar un registro válido", "Información", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
+                else if(dgvDatos.SelectedRows.Count == 0)
+                    MessageBox.Show("Favor de seleccionar un registro válido", "Información", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 else
                     MessageBox.Show("Favor de seleccionar solo 1 registro", "Información", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 

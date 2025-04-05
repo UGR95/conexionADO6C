@@ -33,7 +33,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.txbCP = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.txbEstado = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.txbCiudad = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -46,6 +45,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.btnModificar = new System.Windows.Forms.Button();
             this.chbContrato = new System.Windows.Forms.CheckBox();
+            this.cbEstados = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // mskTelefono
@@ -88,13 +88,6 @@
             this.label7.Size = new System.Drawing.Size(40, 13);
             this.label7.TabIndex = 56;
             this.label7.Text = "Estado";
-            // 
-            // txbEstado
-            // 
-            this.txbEstado.Location = new System.Drawing.Point(114, 245);
-            this.txbEstado.Name = "txbEstado";
-            this.txbEstado.Size = new System.Drawing.Size(123, 20);
-            this.txbEstado.TabIndex = 55;
             // 
             // label8
             // 
@@ -198,11 +191,20 @@
             this.chbContrato.Text = "Contrato";
             this.chbContrato.UseVisualStyleBackColor = true;
             // 
+            // cbEstados
+            // 
+            this.cbEstados.FormattingEnabled = true;
+            this.cbEstados.Location = new System.Drawing.Point(114, 242);
+            this.cbEstados.Name = "cbEstados";
+            this.cbEstados.Size = new System.Drawing.Size(121, 21);
+            this.cbEstados.TabIndex = 62;
+            // 
             // frmActualizarAutor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(267, 438);
+            this.Controls.Add(this.cbEstados);
             this.Controls.Add(this.chbContrato);
             this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.mskTelefono);
@@ -210,7 +212,6 @@
             this.Controls.Add(this.label6);
             this.Controls.Add(this.txbCP);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.txbEstado);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.txbCiudad);
             this.Controls.Add(this.label9);
@@ -223,6 +224,7 @@
             this.Controls.Add(this.label2);
             this.Name = "frmActualizarAutor";
             this.Text = "frmActualizarAutor";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmActualizarAutor_FormClosed);
             this.Load += new System.EventHandler(this.frmActualizarAutor_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -236,7 +238,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txbCP;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox txbEstado;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox txbCiudad;
         private System.Windows.Forms.Label label9;
@@ -249,5 +250,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnModificar;
         private System.Windows.Forms.CheckBox chbContrato;
+        private System.Windows.Forms.ComboBox cbEstados;
     }
 }

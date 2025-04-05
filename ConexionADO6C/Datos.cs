@@ -62,14 +62,21 @@ namespace ConexionADO6C
             DataTable dt = new DataTable();
             try
             {
-                string QueryFiltro = "SELECT * FROM Authors WITH(NOLOCK) WHERE au_Fname like '%" + Filtro + "%'";
+                #region Query
+                //string QueryFiltro = "SELECT * FROM Authors WITH(NOLOCK) WHERE au_Fname like '%" + Filtro + "%'";
+                #endregion
 
                 SqlConnection con = new SqlConnection(Connexionstring);
                 con.Open();
 
-                SqlDataAdapter da = new SqlDataAdapter(QueryFiltro, con);
+                SqlCommand cmd = new SqlCommand("sprConsultarAutoresFiltro", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@Nombre", Filtro);
 
-                da.Fill(dt);
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    dt.Load(dr);
+                }
 
                 con.Close();
                 return dt;
@@ -129,19 +136,26 @@ namespace ConexionADO6C
         {
             try
             {
-
-                string QueryAgregar = "DELETE FROM Authors WHERE au_id = '" + id + "'";
-
+                #region Query Eliminar
+                //string QueryAgregar = "DELETE FROM Authors WHERE au_id = '" + id + "'";
+                #endregion
 
                 SqlConnection con = new SqlConnection(Connexionstring);
                 con.Open();
-                SqlCommand cmd = new SqlCommand(QueryAgregar, con);
+                SqlCommand cmd = new SqlCommand("spdEliminarAutor", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@Id", id);
+
+                // Declarar parámetro de salida si ocurre algún error
+                SqlParameter paramError = new SqlParameter("@Error", SqlDbType.VarChar, 100);
+                paramError.Direction = ParameterDirection.Output;
+                cmd.Parameters.Add(paramError);
 
                 cmd.ExecuteNonQuery();
 
                 con.Close();
 
-                return null;
+                return paramError.Value.ToString();
             }
             catch (Exception ex)
             {
@@ -152,28 +166,44 @@ namespace ConexionADO6C
         {
             try
             {
-                int cont = Contrato == true ? 1 : 0;
-                string QueryAgregar = "UPDATE Authors" +
-                    " SET au_lname = '" + Apellido + "'," +
-                    "au_fname = '" + Nombre + "'," +
-                    "phone = '" + Telefono + "'," +
-                    "address ='" + Direccion + "'," +
-                    "city = '" + Ciudad + "'," +
-                    "state = '" + Estado + "'," +
-                    "zip = " + CodigoPostal + "," +
-                    "contract = " + cont + 
-                    "WHERE au_id = '" + id +"'";
-
+                #region Query Update
+                //int cont = Contrato == true ? 1 : 0;
+                //string QueryAgregar = "UPDATE Authors" +
+                //    " SET au_lname = '" + Apellido + "'," +
+                //    "au_fname = '" + Nombre + "'," +
+                //    "phone = '" + Telefono + "'," +
+                //    "address ='" + Direccion + "'," +
+                //    "city = '" + Ciudad + "'," +
+                //    "state = '" + Estado + "'," +
+                //    "zip = " + CodigoPostal + "," +
+                //    "contract = " + cont + 
+                //    "WHERE au_id = '" + id +"'";
+                #endregion
 
                 SqlConnection con = new SqlConnection(Connexionstring);
                 con.Open();
-                SqlCommand cmd = new SqlCommand(QueryAgregar, con);
+                SqlCommand cmd = new SqlCommand("spuActualizarAutor", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@Id", id);
+                cmd.Parameters.AddWithValue("@Nombre", Nombre);
+                cmd.Parameters.AddWithValue("@Apellido", Apellido);
+                cmd.Parameters.AddWithValue("@Telefono", Telefono);
+                cmd.Parameters.AddWithValue("@Direccion", Direccion);
+                cmd.Parameters.AddWithValue("@Ciudad", Direccion);
+                cmd.Parameters.AddWithValue("@Estado", Estado);
+                cmd.Parameters.AddWithValue("@CodigoPostal", CodigoPostal);
+                cmd.Parameters.AddWithValue("@Contrato", Contrato);
+
+                // Declarar parámetro de salida si ocurre algún error
+                SqlParameter paramError = new SqlParameter("@Error", SqlDbType.VarChar, 100);
+                paramError.Direction = ParameterDirection.Output;
+                cmd.Parameters.Add(paramError);
 
                 cmd.ExecuteNonQuery();
 
                 con.Close();
 
-                return null;
+                return paramError.Value.ToString();
             }
             catch (Exception ex)
             {

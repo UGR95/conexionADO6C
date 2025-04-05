@@ -60,7 +60,7 @@
             // 
             // btnAgregar
             // 
-            this.btnAgregar.Location = new System.Drawing.Point(26, 468);
+            this.btnAgregar.Location = new System.Drawing.Point(94, 468);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(75, 23);
             this.btnAgregar.TabIndex = 41;
@@ -195,7 +195,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(11, 33);
+            this.label1.Location = new System.Drawing.Point(15, 31);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(44, 13);
             this.label1.TabIndex = 23;
@@ -203,9 +203,9 @@
             // 
             // txbFiltro
             // 
-            this.txbFiltro.Location = new System.Drawing.Point(85, 30);
+            this.txbFiltro.Location = new System.Drawing.Point(78, 28);
             this.txbFiltro.Name = "txbFiltro";
-            this.txbFiltro.Size = new System.Drawing.Size(222, 20);
+            this.txbFiltro.Size = new System.Drawing.Size(153, 20);
             this.txbFiltro.TabIndex = 22;
             this.txbFiltro.TextChanged += new System.EventHandler(this.txbFiltro_TextChanged);
             // 
@@ -236,7 +236,7 @@
             // 
             // btnEliminar
             // 
-            this.btnEliminar.Location = new System.Drawing.Point(151, 468);
+            this.btnEliminar.Location = new System.Drawing.Point(585, 468);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(75, 23);
             this.btnEliminar.TabIndex = 44;
@@ -246,7 +246,7 @@
             // 
             // btnModificar
             // 
-            this.btnModificar.Location = new System.Drawing.Point(273, 468);
+            this.btnModificar.Location = new System.Drawing.Point(487, 468);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(75, 23);
             this.btnModificar.TabIndex = 45;
@@ -257,7 +257,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(378, 33);
+            this.label10.Location = new System.Drawing.Point(270, 32);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(40, 13);
             this.label10.TabIndex = 46;
@@ -269,9 +269,9 @@
             this.groupBox1.Controls.Add(this.txbFiltro);
             this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(46, 12);
+            this.groupBox1.Location = new System.Drawing.Point(312, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(658, 70);
+            this.groupBox1.Size = new System.Drawing.Size(476, 70);
             this.groupBox1.TabIndex = 47;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtro";
@@ -279,7 +279,7 @@
             // cbEstados
             // 
             this.cbEstados.FormattingEnabled = true;
-            this.cbEstados.Location = new System.Drawing.Point(441, 29);
+            this.cbEstados.Location = new System.Drawing.Point(333, 28);
             this.cbEstados.Name = "cbEstados";
             this.cbEstados.Size = new System.Drawing.Size(121, 21);
             this.cbEstados.TabIndex = 47;
